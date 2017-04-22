@@ -2,18 +2,14 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
-
+gem 'rails', '4.2.3'
+# Use sqlite3 as the database for Active Record
+gem 'devise'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+gem 'stock_quote'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-#Devise
-gem 'devise'
-#Devise bootstrap
-gem 'devise-bootstrap-views'
-#bootstrap
-gem 'twitter-bootstrap-rails'
-#stock quote
-gem 'stock_quote'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -40,17 +36,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'sqlite3', '1.3.12'
-  gem 'byebug',  '9.0.0', platform: :mri
-end
+  gem 'sqlite3'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
 
-group :development do
-  gem 'web-console',           '3.1.1'
-  gem 'listen',                '3.0.8'
-  gem 'spring',                '1.7.2'
-  gem 'spring-watcher-listen', '2.0.0'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
 
 group :production do
-  gem 'pg', '0.18.4'
+  gem 'pg'
+  gem 'rails_12factor'
 end

@@ -25,27 +25,27 @@ class UserStocksController < ApplicationController
   # POST /user_stocks.json
   def create
     if params[:stock_id].present?
-     # @user_stock = UserStock.new(user_stock_params)
       @user_stock = UserStock.new(stock_id: params[:stock_id], user: current_user)
-    else 
+    else
       stock = Stock.find_by_ticker(params[:stock_ticker])
-       if stock
-         @user_stock = UserStock.new(user: current_user, stock: stock)
-       else 
-         stock = Stock.new_from_lookup(params[:stock_ticker])
-          if stock.save
-            @user_stock = UserStock.new(user: current_user, stock: stock)
-          else 
-            @user_stock = nil 
-            flash[:error] = "Stock is not available"
-          end
-        end 
-       end 
-       
+      if stock
+        @user_stock = UserStock.new(user: current_user, stock: stock)
+      else
+        stock = Stock.new_from_lookup(params[:stock_ticker])
+        if stock.save
+          @user_stock = UserStock.new(user: current_user, stock: stock)
+        else
+          @user_stock = nil
+          flash[:error] = "Stock is not available"
+        end
+      end
+    end
+    
+
     respond_to do |format|
       if @user_stock.save
-        format.html { redirect_to my_portfolio_path,
-        notice: "Stock #{@user_stock.stock.ticker} was successfully added" }
+        format.html { redirect_to my_portfolio_path, 
+          notice: "Stock #{@user_stock.stock.ticker} was successfully added" }
         format.json { render :show, status: :created, location: @user_stock }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class UserStocksController < ApplicationController
   def update
     respond_to do |format|
       if @user_stock.update(user_stock_params)
-        format.html { redirect_to @user_stock, notice: 'User stock was successfully created.' }
+        format.html { redirect_to @user_stock, notice: 'User stock was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_stock }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class UserStocksController < ApplicationController
   def destroy
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to my_portfolio_path, notice: 'Stock was successfully removed from portfolio' }
+      format.html { redirect_to my_portfolio_path, notice: 'Stock was successfully removed from portfolio.' }
       format.json { head :no_content }
     end
   end
