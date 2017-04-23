@@ -1,5 +1,6 @@
 var init_stock_lookup;
 
+
 init_stock_lookup = function() {
   $('#stock-lookup-form').on('ajax:before', function(event, data, status){
     show_spinner();
@@ -14,10 +15,10 @@ init_stock_lookup = function() {
     init_stock_lookup();
   });
   
-   //listeners are gone once replace
-    //with data is used, so we call init_stock_lookup() again.
-
-    //Handle errors
+  //Listeners are gone once replace
+  //with data is used, so we call init_stock_lookup() again. 
+  
+  //Handle errors
   $('#stock-lookup-form').on('ajax:error', function(event, xhr, status, error){
     hide_spinner();
     $('#stock-lookup-results').replaceWith(' ');

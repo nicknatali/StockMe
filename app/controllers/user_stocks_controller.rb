@@ -84,7 +84,7 @@ class UserStocksController < ApplicationController
       @user_stock = UserStock.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    #Make sure not to take parameters from the internet, allow the white list through.
     def user_stock_params
       params.require(:user_stock).permit(:user_id, :stock_id)
     end

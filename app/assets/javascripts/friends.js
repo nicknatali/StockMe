@@ -15,13 +15,14 @@ init_friend_lookup = function() {
   });
   
   //Listeners are gone once replace with data is used,
-  //so we can call init_friend_lookup() again.
+  //So we can call init_friend_lookup() again. 
   
-  //Handle errors
+  
+  //Handle errors  
   $('#friend-lookup-form').on('ajax:error', function(event, xhr, status, error){
     hide_spinner();
     $('#friend-lookup-results').replaceWith(' ');
-    $('#friend-lookup-errors').replaceWith('We could not find your friend :( ');
+    $('#friend-lookup-errors').replaceWith('Your friend seems to be imaginary, we cannot find them.');
   });
 }
 

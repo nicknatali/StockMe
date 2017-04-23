@@ -16,10 +16,12 @@
 // require turbolinks
 //= require_tree .
 
-var hide_spinner = function() {
-    $('#spinner').hide();
+//Hide the spinner 
+var hide_spinner = function(){
+  $('#spinner').hide();
 }
 
-var show_spinner = function() {
-    $('#spinner').show();
+//Display the spinner while "processing"
+var show_spinner = function(){
+  $('#spinner').show();
 }

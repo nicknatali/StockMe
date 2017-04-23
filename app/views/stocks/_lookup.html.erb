@@ -1,5 +1,6 @@
 <div id="stock-lookup">
   <h3>Search for Stocks</h3>
+  <!-- Send request to search stocks path using AJAX -->
   <%= form_tag search_stocks_path, remote: true, method: :get, id: 'stock-lookup-form' do %>
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
@@ -7,15 +8,18 @@
                                                           class: 'form-control search-box input-lg' %>
     </div>
     <div class="col-md-2">
+      <!-- Button for submission -->
       <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
         <i class="fa fa-search"></i> Look up a stock
       <% end %>
     </div>
   </div>
   <% end %>
+  <!-- display spinner while looking up -->
   <%= render 'common/spinner' %>
+  <!-- if there is a stock --> 
   <% if @stock %>
-  <!-- If ticker is found --> 
+  <!-- Display stock information --> 
     <div id="stock-lookup-results" class="well results-block">
       <strong>Symbol:</strong> <%= @stock.ticker %>
       <strong>Name:</strong> <%= @stock.name %>
