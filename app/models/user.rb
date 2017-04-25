@@ -13,20 +13,24 @@ class User < ActiveRecord::Base
     "Anonymous"
   end
   
+  # can add a stock if it doesn't surpass the limit and if it isn't already added
   def can_add_stock?(ticker_symbol)
     under_stock_limit? && !stock_already_added?(ticker_symbol)
   end
   
+  # stock limit is 10 stocks
   def under_stock_limit?
     (user_stocks.count < 10)
   end
   
+  # check if stock is already added
   def stock_already_added?(ticker_symbol)
     stock = Stock.find_by_ticker(ticker_symbol)
     return false unless stock
     user_stocks.where(stock_id: stock.id).exists?
   end
   
+  # check if not friends with someone
   def not_friends_with?(friend_id)
     friendships.where(friend_id: friend_id).count < 1
   end

@@ -12,9 +12,11 @@ class UsersController < ApplicationController
     @users = User.search(params[:search_param])
     
     if @users
+      # get users that arent the current user
       @users = current_user.except_current_user(@users)
       render partial: "friends/lookup"
     else
+      # if no users found
       render status: :not_found, nothing: true
     end
   end
@@ -23,6 +25,7 @@ class UsersController < ApplicationController
     @friend = User.find(params[:friend])
     current_user.friendships.build(friend_id: @friend.id)
     
+    #saving friends
     if current_user.save
       redirect_to my_friends_path, notice: "Yay you've made a friend!!"
     else
@@ -30,6 +33,7 @@ class UsersController < ApplicationController
     end
   end
   
+  # show a user's stocks
   def show
     @user = User.find(params[:id])
     @user_stocks = @user.stocks
